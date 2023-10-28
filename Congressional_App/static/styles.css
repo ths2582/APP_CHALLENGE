@@ -1,0 +1,68 @@
+/* for your CSS */
+body {
+    background-color: #FFFAFA;
+  }
+.SearchBar{
+    height: 50px;
+    width: 500px;
+}
+
+.Date{
+    height: 50px;
+    width: 200px;
+}
+
+.ArticleImage{
+    width: 200px;
+}
+
+h2 {
+    font-size: 20px;
+  }
+
+table {
+    border: 4px solid LightCoral;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+td {
+    border: 2px solid LightCoral;
+    padding: 12px 15px;
+    font-size: 20px;
+}
+th{
+    border: 2px solid LightCoral;
+    background-color: LightCoral;
+    color: #ffffff;
+    font-size: 30px;
+}
+.nav-link {
+    color: white;
+}
+
+h4{
+    padding-top: 100px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 80px;
+    font-size: 100px;
+}
+
+.container {
+    margin-left: auto;
+    width: 100%;
+    border: 4px solid LightCoral;
+    padding: 10px;
+    text-align: left;
+    background-color: #fef7f7;
+
+  }
+/* creating special bordershapes https://www.youtube.com/watch?v=AOxKn4_j4JQ */
+.box {
+    width: 1000px;
+    height: 400px;
+    margin: auto;
+    border-radius: 20% 40px 20% 40px;
+    border: solid LightCoral 10px;
+}
