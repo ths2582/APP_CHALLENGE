@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Recipes
+{% endblock %}
+
+{% block main %}
+    <h1>Recommended Recipes</h1>
+    {% for recipe in recipes %}
+        <h1>
+            <img src= "{{ recipe['image'] }}" alt="Italian Trulli">
+            {{recipe['title']}}
+            
+        </h1>
+    {% endfor %}
+
+{% endblock %}

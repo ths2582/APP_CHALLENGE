@@ -6,8 +6,6 @@ import requests
 
 from flask import Flask, flash, redirect, render_template, request, session
 
-BingMapsKey = "AhkZGTzNUxseN5Tb-IxxOzQZ2k2IkXksXBua-LbD0FO_L-vXwg4yshTifpr0BF9H"
-
 # Configure application
 app = Flask(__name__)
 
@@ -22,12 +20,39 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
-
 @app.route("/")
 def index():
     """Home Page"""
     return render_template("index.html")
 
+#RECIPES CODE
+def find_recipes(query, diet, intolerances, number):
+    spoonacular_key = "97c986fad9454d9198188fa867964a6f"
+    options = "query=" + query + "&diet=" + diet + "&intolerances=" + intolerances + "&number=" + number + "&apiKey=" + spoonacular_key
+    request = requests.get(f"https://api.spoonacular.com/recipes/complexSearch?{options}")
+    if request.status_code != 204:
+        return request.json()
+    return "mega fail"
+
+def get_recipe_card(id):
+    request = requests.get(f"https://api.spoonacular.com/recipes/{id}/card")
+    return request.json
+
+@app.route("/recipe_query", methods=["GET", "POST"])
+def recipe_query():
+        if(request.method == "GET"):
+            return render_template("recipe_query.html")
+        elif (request.method == "POST"):
+            query = request.form.get("query")
+            diet = request.form.get("diet")
+            intolerance = request.form.get("intolerance")
+            number = request.form.get("results")
+            recipe_data = find_recipes(query, diet, intolerance, number)
+            return render_template("recipes.html", recipes = recipe_data['results'], get_recipe_card = get_recipe_card)
+
+
+
+#LOCATION CODE
 def create_map(locationx, locationy, location, stores):
     BingMapsKey = "AhkZGTzNUxseN5Tb-IxxOzQZ2k2IkXksXBua-LbD0FO_L-vXwg4yshTifpr0BF9H"
     link = f"https://dev.virtualearth.net/REST/v1/Imagery/Map/CanvasDark/?mapSize=1000,500"

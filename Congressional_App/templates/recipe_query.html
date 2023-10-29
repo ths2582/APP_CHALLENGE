@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Find Recipes
+
+{% endblock %}
+
+{% block main %}
+    <h1>Search</h1>
+        <form name = "recipe search" action= "/recipe_query" method = "post" onsubmit="return validateForm()">
+            <input autocomplete="off" autofocus name="query" placeholder = "What food do you want?" type="text" class = "SearchBar">
+            <input autocomplete="off" autofocus name="diet" placeholder = "What diet would you like?" type="text" class = "SearchBar">
+            <input autocomplete="off" autofocus name="intolerance" placeholder = "Do you have any intolerances?" type="text" class = "SearchBar">
+            <input autocomplete="off" autofocus name="results" placeholder = "How many results would you like?" type="text" class = "SearchBar">
+                <button type = "submit">Search</button>
+        </form>
+
+
+
+{% endblock %}
