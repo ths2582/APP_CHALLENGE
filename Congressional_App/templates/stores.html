@@ -5,12 +5,11 @@
 {% endblock %}
 
 {% block main %}
-    <h1>Recommended Stores in Your Area</h1>
+    <h1>Recommended Stores Near {{ location }}</h1>
     {% for store in stores %}
         <h3> {{ store[0] }}</h3>
         <h2>{{ store[1] }}</h2>
     {% endfor %}
-    <h1>{{ location }}</h1>
-    <img src="https://dev.virtualearth.net/REST/v1/Imagery/Map/Road/47.619048,-122.35384/15?mapSize=500,500&pp=47.620495,-122.34931;21;AA&pp=47.619385,-122.351485;;AB&pp=47.616295,-122.3556;22&key=AhkZGTzNUxseN5Tb-IxxOzQZ2k2IkXksXBua-LbD0FO_L-vXwg4yshTifpr0BF9H" alt="Italian Trulli">
+    <img src= "{{ map }}" alt="Italian Trulli">
 
 {% endblock %}

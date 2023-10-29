@@ -28,7 +28,15 @@ def index():
     """Home Page"""
     return render_template("index.html")
 
-def create_map()
+def create_map(locationx, locationy, location, stores):
+    BingMapsKey = "AhkZGTzNUxseN5Tb-IxxOzQZ2k2IkXksXBua-LbD0FO_L-vXwg4yshTifpr0BF9H"
+    link = f"https://dev.virtualearth.net/REST/v1/Imagery/Map/CanvasDark/?mapSize=1000,500"
+    link = link + f"&pp={locationx}, {locationy};129;{location}"
+    for store in stores:
+        link = link + f"&pp={store[2]};;{store[0]}"
+    link = link + f"&dcl=1&key={BingMapsKey}"
+    return link
+
 
 def get_coordinates(location):
     BingMapsKey = "AhkZGTzNUxseN5Tb-IxxOzQZ2k2IkXksXBua-LbD0FO_L-vXwg4yshTifpr0BF9H"
@@ -90,5 +98,8 @@ def location_query():
         location = request.form.get("location")
         longitude, latitude = get_coordinates(location)
         stores = find_grocery_stores(f"{longitude}, {latitude}, 5000")
-        return render_template("stores.html", stores = stores)
+        map = create_map(longitude, latitude, location, stores)
+        if(len(stores) == 0):
+            return render_template("location_not_found.html")
+        return render_template("stores.html", stores = stores, map = map, location = location)
 

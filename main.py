@@ -77,6 +77,7 @@ for direction in find_directions("Tower Hill School", "39.7571907, -75.56382751"
 # finding grocery around Christiana mall
 for store in find_grocery_stores(f"{xcoordinate}, {ycoordinate}, 5000"):
     print(store, end="\n")
+    print(store[2])
     travelDistance, travelDuration = find_distance("39.76536934795396, -75.57746900413086", store[1])
     if(travelDuration!=-1):
         print(f"{travelDistance} miles" , f"in {travelDuration} seconds")
