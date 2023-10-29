@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+    <h1>Recommended Stores in Your Area</h1>
+    {% for store in stores %}
+        <h2>{{ store[0] }}</h2>
+    {% endfor %}
+
+{% endblock %}
