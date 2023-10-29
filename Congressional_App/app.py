@@ -28,9 +28,18 @@ def index():
     """Home Page"""
     return render_template("index.html")
 
+def create_map()
 
 def get_coordinates(location):
     BingMapsKey = "AhkZGTzNUxseN5Tb-IxxOzQZ2k2IkXksXBua-LbD0FO_L-vXwg4yshTifpr0BF9H"
+    r = requests.get(
+        f"http://dev.virtualearth.net/REST/v1/Locations/{location}?includeNeighborhood=1&maxResults=1&key={BingMapsKey}")
+
+    coordinates = r.json()
+    xcoordinate = coordinates['resourceSets'][0]['resources'][0]['point']['coordinates'][0]
+    ycoordinate = coordinates['resourceSets'][0]['resources'][0]['point']['coordinates'][1]
+    return xcoordinate, ycoordinate
+
 
 def find_grocery_stores(parameters):
     BingMapsKey = "AhkZGTzNUxseN5Tb-IxxOzQZ2k2IkXksXBua-LbD0FO_L-vXwg4yshTifpr0BF9H"
@@ -51,17 +60,6 @@ def find_grocery_stores(parameters):
         return
     # returns information in a tuple
     return lst
-
-
-def find_directions(user_location, destination):
-    # user_location and destination can be address or coordinates
-    r = requests.get(f"http://dev.virtualearth.net/REST/v1/Routes?wayPoint.1={user_location}&wayPoint.2={destination}&key={BingMapsKey}&distanceUnit=mi&durationUnit=Minute&trafficDataUsed=FlowAndClosure")
-    route = r.json()
-    directions = []
-    for direction in route['resourceSets'][0]['resources'][0]['routeLegs'][0]['itineraryItems']:
-        directions.append(direction['instruction']['text'])
-    return directions
-
 
 def find_distance(user_location, destination):
     # user_location and destination can be address or coordinates
@@ -90,6 +88,7 @@ def location_query():
         return render_template("location_query.html")
     elif (request.method == "POST"):
         location = request.form.get("location")
-        stores = find_grocery_stores("39.6734332362205, -75.64806944984902, 5000")
+        longitude, latitude = get_coordinates(location)
+        stores = find_grocery_stores(f"{longitude}, {latitude}, 5000")
         return render_template("stores.html", stores = stores)
 

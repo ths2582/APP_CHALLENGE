@@ -56,10 +56,26 @@ def get_map(user_location, destination):
     print(r)
 
 
+def get_coordinates(location):
+    BingMapsKey = "AhkZGTzNUxseN5Tb-IxxOzQZ2k2IkXksXBua-LbD0FO_L-vXwg4yshTifpr0BF9H"
+    r = requests.get(
+        f"http://dev.virtualearth.net/REST/v1/Locations/{location}?includeNeighborhood=1&maxResults=1&key={BingMapsKey}")
+
+    coordinates = r.json()
+    xcoordinate = coordinates['resourceSets'][0]['resources'][0]['point']['coordinates'][0]
+    ycoordinate = coordinates['resourceSets'][0]['resources'][0]['point']['coordinates'][1]
+    return xcoordinate, ycoordinate
+
+
+xcoordinate, ycoordinate = get_coordinates("Tower Hill School")
+print(xcoordinate)
+print(ycoordinate)
+
+
 for direction in find_directions("Tower Hill School", "39.7571907, -75.56382751"):
     print(direction)
 # finding grocery around Christiana mall
-for store in find_grocery_stores("39.6734332362205, -75.64806944984902, 5000"):
+for store in find_grocery_stores(f"{xcoordinate}, {ycoordinate}, 5000"):
     print(store, end="\n")
     travelDistance, travelDuration = find_distance("39.76536934795396, -75.57746900413086", store[1])
     if(travelDuration!=-1):
