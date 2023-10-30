@@ -9,8 +9,8 @@
     {% for recipe in recipes %}
         <h1>
             <img src= "{{ recipe['image'] }}" alt="Italian Trulli">
-            {{recipe['title']}}
-            
+            <a href="{{recipe['sourceUrl']}}" target="_blank">{{recipe['title']}}</a>
+            Price: ${{(recipe['pricePerServing'] * recipe['servings']/100) |round(2)}} for {{recipe['servings']}} servings
         </h1>
     {% endfor %}
 

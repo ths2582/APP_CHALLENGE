@@ -28,15 +28,11 @@ def index():
 #RECIPES CODE
 def find_recipes(query, diet, intolerances, number):
     spoonacular_key = "97c986fad9454d9198188fa867964a6f"
-    options = "query=" + query + "&diet=" + diet + "&intolerances=" + intolerances + "&number=" + number + "&apiKey=" + spoonacular_key
+    options = "query=" + query + "&diet=" + diet + "&intolerances=" + intolerances + "&number=" + number + "&addRecipeInfomration=true&addRecipeNutrition=true" +"&apiKey=" + spoonacular_key
     request = requests.get(f"https://api.spoonacular.com/recipes/complexSearch?{options}")
     if request.status_code != 204:
         return request.json()
     return "mega fail"
-
-def get_recipe_card(id):
-    request = requests.get(f"https://api.spoonacular.com/recipes/{id}/card")
-    return request.json
 
 @app.route("/recipe_query", methods=["GET", "POST"])
 def recipe_query():
@@ -48,7 +44,7 @@ def recipe_query():
             intolerance = request.form.get("intolerance")
             number = request.form.get("results")
             recipe_data = find_recipes(query, diet, intolerance, number)
-            return render_template("recipes.html", recipes = recipe_data['results'], get_recipe_card = get_recipe_card)
+            return render_template("recipes.html", recipes = recipe_data['results'])
 
 
 
