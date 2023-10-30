@@ -1,6 +1,6 @@
 /* for your CSS */
 body {
-    background-image: linear-gradient(to bottom right, violet, tan, #4d805d);
+    background-image: url('food.jpg');;
       
   }
 .SearchBar{
