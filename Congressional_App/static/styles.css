@@ -1,6 +1,7 @@
 /* for your CSS */
 body {
-    background-color: #FFFAFA;
+    background-image: linear-gradient(to bottom right, violet, tan, #4d805d);
+      
   }
 .SearchBar{
     height: 50px;
