@@ -44,8 +44,8 @@ def recipe_query():
             return render_template("recipe_query.html")
         elif (request.method == "POST"):
             query = request.form.get("query")
-            diet = request.form.get("diet")
-            intolerance = request.form.get("intolerance")
+            diet = request.form.get("selectDiet")
+            intolerance = request.form.get("selectIntolerance")
             number = request.form.get("results")
             recipe_data = find_recipes(query, diet, intolerance, number)
             return render_template("recipes.html", recipes = recipe_data['results'], get_recipe_card = get_recipe_card)
